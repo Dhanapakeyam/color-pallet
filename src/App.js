@@ -1,25 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AddColor />
     </div>
   );
 }
 
+function AddColor() {
+  const [color, setColor] = useState("red");
+  const [colorList, setcolorList] = useState(["green", "orange", "skyblue", "pink"]);
+  const styles = { background: color };
+  return (
+    <div>
+      <input style={styles} onChange={(event) => setColor(event.target.value)} placeholder="Enter a color" value={color} />
+      <button onClick={() => setcolorList([...colorList, color])}>Add Color</button>
+      {colorList.map((clr) => (<ColorBox colorname={clr} />))};
+    </div>
+  );
+}
+
+function ColorBox({ colorname }) {
+  const palletStyle = {
+    marginTop: "30px",
+    marginLeft: "50px",
+    width: "200px",
+    height: "25px",
+    background: colorname
+  };
+  return <div style={palletStyle}>
+  </div>
+
+}
 export default App;
